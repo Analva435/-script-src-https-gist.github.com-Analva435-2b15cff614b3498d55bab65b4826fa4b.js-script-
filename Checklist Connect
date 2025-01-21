@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect Empreendimentos - Questionário</title>
+    <style>
+        body {
+            font-family: "Courier New", Courier, monospace;
+            background-color: #e3f2fd;
+            color: #0d47a1;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        h1 {
+            text-align: center;
+            color: #1565c0;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        input[type="text"], input[type="number"], textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #90caf9;
+            border-radius: 4px;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #1565c0;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0d47a1;
+        }
+    </style>
+    <script>
+        function enviarParaWhatsApp(event) {
+            event.preventDefault();
+
+            const nome = document.querySelector('input[name="nome"]').value;
+            const telefone = document.querySelector('input[name="telefone"]').value;
+            const email = document.querySelector('input[name="email"]').value;
+
+            const tipoImovel = document.querySelector('input[name="tipo-imovel"]:checked')?.value || "";
+            const valorMaximo = document.querySelector('input[name="valor-maximo"]').value;
+            const valorMinimo = document.querySelector('input[name="valor-minimo"]').value;
+            const valorMaximo2 = document.querySelector('input[name="valor-maximo2"]').value;
+            const valorAcima = document.querySelector('input[name="valor-acima"]').value;
+            const pacoteFechado = document.querySelector('input[name="pacote-fechado"]:checked')?.value || "";
+            const valorPacote = document.querySelector('input[name="valor-pacote"]').value;
+
+            const bairrosInteresse = document.querySelector('input[name="bairros-interesse"]').value;
+            const bairrosAlternativos = document.querySelector('input[name="bairros-alternativos"]').value;
+            const proximidadeLocais = document.querySelector('input[name="proximidade-locais"]').value;
+
+            const dormitorios = document.querySelector('input[name="dormitorios"]').value;
+            const suites = document.querySelector('input[name="suites"]').value;
+            const banheiros = document.querySelector('input[name="banheiros"]').value;
+            const garagem = document.querySelector('input[name="garagem"]:checked')?.value || "";
+            const vagasGaragem = document.querySelector('input[name="vagas-garagem"]').value;
+            const areaUtil = document.querySelector('input[name="area-util"]').value;
+            const areaLazer = document.querySelector('input[name="area-lazer"]').value;
+            const outrasEspecificacoes = document.querySelector('input[name="outras-especificacoes"]').value;
+
+            const condominio = document.querySelector('input[name="condominio"]:checked')?.value || "";
+            const animais = document.querySelector('input[name="animais"]:checked')?.value || "";
+            const quaisAnimais = document.querySelector('input[name="quais-animais"]').value;
+
+            const urgencia = document.querySelector('input[name="urgencia"]:checked')?.value || "";
+            const observacoes = document.querySelector('textarea[name="observacoes"]').value;
+
+            const mensagem = `Nome: ${nome}\nTelefone: ${telefone}\nEmail: ${email}\n\nTipo de Imóvel: ${tipoImovel}\nFaixa de Valor: Até R$ ${valorMaximo}, De R$ ${valorMinimo} a R$ ${valorMaximo2}, Acima de R$ ${valorAcima}\nPacote Fechado: ${pacoteFechado} - Valor Máximo: R$ ${valorPacote}\n\nLocalização Desejada:\n- Bairros de Interesse: ${bairrosInteresse}\n- Bairros Alternativos: ${bairrosAlternativos}\n- Proximidade de locais específicos: ${proximidadeLocais}\n\nCaracterísticas do Imóvel:\n- Dormitórios: ${dormitorios}\n- Suítes: ${suites}\n- Banheiros: ${banheiros}\n- Garagem: ${garagem}, Vagas: ${vagasGaragem}\n- Área Útil: ${areaUtil} m²\n- Área de Lazer: ${areaLazer}\n- Outras Especificações: ${outrasEspecificacoes}\n\nCondomínio: ${condominio}\nAnimais de Estimação: ${animais} - Quais: ${quaisAnimais}\nUrgência: ${urgencia}\n\nObservações Adicionais: ${observacoes}`;
+
+            const numeroWhatsApp = "551533265502";
+            const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
+
+            window.open(url, '_blank');
+        }
+    </script>
+</head>
+<body>
+    <h1>Connect Empreendimentos - Questionário</h1>
+    <form onsubmit="enviarParaWhatsApp(event)">
+        <!-- Nome Completo -->
+        <div class="form-group">
+            <label>Nome Completo</label>
+            <input type="text" name="nome" required>
+        </div>
+
+        <!-- Telefone -->
+        <div class="form-group">
+            <label>Telefone</label>
+            <input type="text" name="telefone" required>
+        </div>
+
+        <!-- E-mail -->
+        <div class="form-group">
+            <label>E-mail</label>
+            <input type="email" name="email" required>
+        </div>
+
+        <!-- Tipo de Imóvel -->
+        <div class="form-group">
+            <label for="tipo-imovel">1. Tipo de Imóvel</label>
+            <input type="radio" name="tipo-imovel" value="Casa"> Casa<br>
+            <input type="radio" name="tipo-imovel" value="Apartamento"> Apartamento<br>
+            <input type="radio" name="tipo-imovel" value="Sala Comercial"> Sala Comercial<br>
+            <input type="radio" name="tipo-imovel" value="Barracao"> Barracão<br>
+            <input type="radio" name="tipo-imovel" value="Outro"> Outro: <input type="text" name="outro-tipo-imovel">
+        </div>
+
+        <!-- Faixa de Valor -->
+        <div class="form-group">
+            <label>2. Faixa de Valor</label>
+            Até R$ <input type="number" name="valor-maximo"><br>
+            De R$ <input type="number" name="valor-minimo"> a R$ <input type="number" name="valor-maximo2"><br>
+            Acima de R$ <input type="number" name="valor-acima">
+        </div>
+
+        <!-- Pacote Fechado para Locação -->
+        <div class="form-group">
+            <label>3. Pacote Fechado para Locação (Aluguel + Condomínio + IPTU)</label>
+            <input type="radio" name="pacote-fechado" value="Sim"> Sim – Valor Máximo: R$ <input type="number" name="valor-pacote"><br>
+            <input type="radio" name="pacote-fechado" value="Não"> Não
+        </div>
+
+        <!-- Localização Desejada -->
+        <div class="form-group">
+            <label>4. Localização Desejada</label>
+            Bairros de Interesse: <input type="text" name="bairros-interesse"><br>
+            Bairros Alternativos/Similares: <input type="text" name="bairros-alternativos"><br>
+            Proximidade de locais específicos (escolas, comércio, transporte público, etc.): <input type="text" name="proximidade-locais">
+        </div>
+
+        <!-- Características do Imóvel -->
+        <div class="form-group">
+            <label>5. Características do Imóvel</label>
+            Número de dormitórios: <input type="number" name="dormitorios"><br>
+            Suítes: <input type="number" name="suites"><br>
+            Banheiros: <input type="number" name="banheiros"><br>
+            Garagem:<br>
+            <input type="radio" name="garagem" value="Sim"> Sim – Quantas vagas? <input type="number" name="vagas-garagem"><br>
+            <input type="radio" name="garagem" value="Não"> Não<br>
+            Área útil mínima: <input type="number" name="area-util" placeholder="m²"><br>
+            Área de lazer (piscina, churrasqueira, salão de festas): <input type="text" name="area-lazer"><br>
+            Outras especificações: <input type="text" name="outras-especificacoes">
+        </div>
+
+        <!-- Condomínio -->
+        <div class="form-group">
+            <label>6. Condomínio</label>
+            <input type="radio" name="condominio" value="Sim"> Sim<br>
+            <input type="radio" name="condominio" value="Não"> Não<br>
+            <input type="radio" name="condominio" value="Indiferente"> Indiferente
+        </div>
+
+        <!-- Animais de Estimação -->
+        <div class="form-group">
+            <label>7. Animais de Estimação</label>
+            <input type="radio" name="animais" value="Sim"> Sim – Qual(is)? <input type="text" name="quais-animais"><br>
+            <input type="radio" name="animais" value="Não"> Não
+        </div>
+
+        <!-- Urgência na Locação -->
+        <div class="form-group">
+            <label>8. Urgência na Locação</label>
+            <input type="radio" name="urgencia" value="Imediato"> Imediato<br>
+            <input type="radio" name="urgencia" value="30-dias"> Em até 30 dias<br>
+            <input type="radio" name="urgencia" value="3-meses"> Em até 3 meses<br>
+            <input type="radio" name="urgencia" value="Sem-pressa"> Sem pressa
+        </div>
+
+        <!-- Observações Adicionais -->
+        <div class="form-group">
+            <label>9. Observações Adicionais</label>
+            <textarea name="observacoes" rows="4"></textarea>
+        </div>
+
+        <button type="submit">Enviar</button>
+    </form>
+</body>
+</html>
